@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Hotel</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* styles.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f4f4f4; /* Light background color */
+}
+
+h1, h3 {
+    text-align: center;
+    color: #333; /* Dark gray for headings */
+}
+
+form {
+    max-width: 800px; /* Increased width for more space */
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+div { /* Each form section gets its own container */
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555; /* Medium gray for labels */
+}
+
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+input[type="email"],
+input[type="time"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* File Input Styling */
+input[type="file"] {
+    display: block; /* Fill the width */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Optional: Style the file input button */
+input[type="file"]::file-selector-button {
+    background-color: #007bff; /* Blue background */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Buttons */
+button[type="submit"],
+button[type="button"] {
+    background-color: #007bff; /* Blue background */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Hover effect */
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Room Details Styling */
+.room-details {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.removeRoom {
+    background-color: #dc3545; /* Red background */
+    color: white;
+}
+
+    </style>
+</head>
+
+<body>
+    <h1>Add New Hotel</h1>
+
+    <form id="hotelForm" action="/admin/addHotel" method="POST" enctype="multipart/form-data">
+        <div>
+            <!-- Automatically generated hotelID -->
+            <label for="hotelID">Hotel ID:</label>
+            <input type="text" id="hotelID" name="hotelID" readonly>
+            <button type="button" id="refreshHotelID">Refresh</button>
+            <br>
+        </div>
+        <div>
+            <label for="hotelName">Name:</label>
+            <input type="text" id="name" name="hotelName" required>
+        </div>
+
+        <div>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="location[city]" required>
+        </div>
+
+        <div>
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="location[country]" value="India" required>
+        </div>
+
+        <div>
+            <label for="rating">Rating:</label>
+            <input type="number" id="rating" name="rating" min="0" max="5" step="0.1" value="4.0" required>
+        </div>
+
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description">Nestled in the historic city of Agra, Hotel Vijay offers a welcoming retreat for travelers seeking comfort, convenience, and a touch of Mughal-era charm. Our rooms exude a cozy ambiance, with warm color palettes, comfortable furnishings, and modern amenities to make you feel right at home. Start your day with a delicious breakfast at our on-site restaurant, featuring a blend of regional specialties and classic favorites. After a day of marveling at the architectural wonders of the Taj Mahal and Agra Fort, unwind by the pool or explore the vibrant local markets. At Hotel Vijay, our friendly staff is dedicated to making your stay in Agra a memorable one.</textarea>
+        </div>
+
+        <div>
+            <label for="amenities">Amenities:</label>
+            <input type="text" id="amenities" name="amenities" placeholder="e.g., Pool, Gym, Spa" value="Complimentary Wi-Fi, air conditioning, flat-screen TVs, tea/coffee making facilities, outdoor pool, fitness center, spa, meeting rooms, rooftop lounge">
+        </div>
+
+        <div>
+            <label for="contactPhone">Contact Phone:</label>
+            <input type="tel" id="contactPhone" name="contact[phone]" placeholder="Enter phone number" value="7899978000">
+        </div>
+
+        <div>
+            <label for="contactEmail">Contact Email:</label>
+            <input type="email" id="contactEmail" name="contact[email]" placeholder="Enter email address" value="hotel@gmail.com">
+        </div>
+
+        <div>
+            <label for="contactWebsite">Website:</label>
+            <input type="text" id="contactWebsite" name="contact[website]" placeholder="Enter website URL" value="www.xyzhotel.com">
+        </div>
+
+        <div>
+            <label for="checkInTime">Check-in Time:</label>
+            <input type="time" id="checkInTime" name="policies[checkInTime]" placeholder="Enter check-in time" value="12:00">
+        </div>
+
+        <div>
+            <label for="checkOutTime">Check-out Time:</label>
+            <input type="time" id="checkOutTime" name="policies[checkOutTime]" placeholder="Enter check-out time" value="11:30">
+        </div>
+
+        <div>
+            <label for="cancellationPolicy">Cancellation Policy:</label>
+            <textarea name="policies[cancellationPolicy]" id="cancellationPolicy" cols="30" rows="10">Free cancellation up to 48 hours before check-in. Guests receive a full refund if they cancel with more than 48 hours' notice. Cancellations within 48 hours of check-in will incur a charge of one night's stay. No-shows will be charged the full cost of the reservation.</textarea>
+        </div>
+
+        <div>
+            <label for="priceRange">Price Range:</label>
+            <input type="number" id="priceRangeMin" name="priceRange[0]" placeholder="Enter minimum price" value="1500" min="0" required>
+            <input type="number" id="priceRangeMax" name="priceRange[1]" placeholder="Enter maximum price" value="3000" min="0" required>
+        </div>
+
+        <div>
+            <label for="images">Images:</label>
+            <input type="file" id="images" name="images" multiple accept="image/*">
+        </div>
+
+        <h3>Room Types</h3>
+        <div id="roomsContainer">
+            <div class="room-details">
+                <label for="roomType1">Room Type:</label>
+                <select name="rooms[0][roomType]" id="roomType1" class="roomTypeSelect" required>
+                    <option value="">Select Room Type</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Deluxe">Deluxe</option>
+                    <option value="Suite">Suite</option>
+                </select>
+                <label for="roomPrice1">Price:</label>
+                <input type="number" name="rooms[0][roomPrice]" id="roomPrice1" required>
+                <label for="roomCapacity1">Room Capacity:</label>
+                <input type="number" name="rooms[0][roomCapacity]" id="roomCapacity1" required max="5">
+                <label for="totalRooms1">Total Rooms:</label>
+                <input type="number" name="rooms[0][totalRooms]" id="totalRooms1" required>
+                <label for="roomsAvailable1">Rooms Available:</label>
+                <input type="number" name="rooms[0][roomsAvailable]" id="roomsAvailable1" required>
+                <label for="roomDescription1">Room Description:</label>
+                <textarea name="rooms[0][description]" id="roomDescription1">Comfortable and affordable accommodations. Standard amenities including a comfortable bed, private bathroom, TV, and complimentary Wi-Fi. Perfect for budget-conscious travelers or those needing a simple place to rest.</textarea>
+                <button type="button" class="removeRoom">Remove</button>
+            </div>
+        </div>
+
+        <button type="button" id="addRoom">Add Room</button>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Function to generate a unique hotelID
+        async function generateID() {
+            try {
+                let response = await fetch('/admin/generateID?type=hotel'); // Assuming there's a route for generating hotelID
+                let data = await response.json();
+                document.getElementById('hotelID').value = data.uniqueID;
+            } catch (error) {
+                console.error('Error generating hotelID:', error);
+            }
+        }
+
+        // Call generateID function when the page loads
+        window.onload = generateID;
+
+        // Function to refresh hotel ID
+        async function refreshHotelID() {
+            try {
+                let response = await fetch('/admin/generateID?type=hotel'); // Assuming there's a route for generating hotelID
+                let data = await response.json();
+                document.getElementById('hotelID').value = data.uniqueID;
+            } catch (error) {
+                console.error('Error generating hotelID:', error);
+            }
+        }
+
+        // Event listener for refresh button
+        document.getElementById('refreshHotelID').addEventListener('click', refreshHotelID);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const addRoomButton = document.getElementById('addRoom');
+            const roomsContainer = document.getElementById('roomsContainer');
+            let roomCounter = 1;
+
+            // Function to set default values based on room type
+            function setDefaultValues(roomType) {
+                switch (roomType) {
+                    case 'Basic':
+                        return { price: 1500, roomCapacity: 3, totalRooms: 25, roomsAvailable: 25 };
+                    case 'Deluxe':
+                        return { price: 2000, roomCapacity: 4, totalRooms: 15, roomsAvailable: 15 };
+                    case 'Suite':
+                        return { price: 3000, roomCapacity: 5, totalRooms: 10, roomsAvailable: 10 };
+                    default:
+                        return { price: 0, roomCapacity: 0, totalRooms: 0, roomsAvailable: 0 };
+                }
+            }
+
+            addRoomButton.addEventListener('click', function () {
+                roomCounter++;
+
+                const roomHtml = `
+                    <div class="room-details">
+                        <label for="roomType${roomCounter}">Room Type:</label>
+                        <select name="rooms[${roomCounter - 1}][roomType]" id="roomType${roomCounter}" class="roomTypeSelect" required>
+                            <option value="">Select Room Type</option>
+                            <option value="Basic">Basic</option>
+                            <option value="Deluxe">Deluxe</option>
+                            <option value="Suite">Suite</option>
+                        </select>
+                        <label for="roomPrice${roomCounter}">Price:</label>
+                        <input type="number" name="rooms[${roomCounter - 1}][roomPrice]" id="roomPrice${roomCounter}" required>
+                        <label for="roomCapacity${roomCounter}">Room Capacity:</label>
+                        <input type="number" name="rooms[${roomCounter - 1}][roomCapacity]" id="roomCapacity${roomCounter}" required max="5">
+                        <label for="totalRooms${roomCounter}">Total Rooms:</label>
+                        <input type="number" name="rooms[${roomCounter - 1}][totalRooms]" id="totalRooms${roomCounter}" required>
+                        <label for="roomsAvailable${roomCounter}">Rooms Available:</label>
+                        <input type="number" name="rooms[${roomCounter - 1}][roomsAvailable]" id="roomsAvailable${roomCounter}" required>
+                        <label for="roomDescription${roomCounter}">Room Description:</label>
+                        <textarea name="rooms[${roomCounter - 1}][description]" id="roomDescription${roomCounter}">Enter Room Description Here...</textarea>
+                        <button type="button" class="removeRoom">Remove</button>
+                    </div>
+                `;
+
+                roomsContainer.insertAdjacentHTML('beforeend', roomHtml);
+
+                // Set default values for the added room
+                const roomTypeSelect = document.getElementById(`roomType${roomCounter}`);
+                const defaultValues = setDefaultValues(roomTypeSelect.value);
+                document.getElementById(`roomPrice${roomCounter}`).value = defaultValues.price;
+                document.getElementById(`roomCapacity${roomCounter}`).value = defaultValues.roomCapacity;
+                document.getElementById(`totalRooms${roomCounter}`).value = defaultValues.totalRooms;
+                document.getElementById(`roomsAvailable${roomCounter}`).value = defaultValues.roomsAvailable;
+
+                // Disable selected room type in other dropdowns
+                const selects = document.querySelectorAll('.roomTypeSelect');
+                const selectedOptions = new Set();
+                selects.forEach(select => {
+                    const selectedValue = select.value;
+                    if (selectedValue) {
+                        selectedOptions.add(selectedValue);
+                    }
+                });
+
+                selects.forEach(select => {
+                    Array.from(select.options).forEach(option => {
+                        if (option.value && selectedOptions.has(option.value) && option.value !== select.value) {
+                            option.disabled = true;
+                        } else {
+                            option.disabled = false;
+                        }
+                    });
+                });
+            });
+
+            roomsContainer.addEventListener('click', function (event) {
+                if (event.target.classList.contains('removeRoom')) {
+                    event.target.parentNode.remove();
+
+                    // Re-enable the removed room type in other dropdowns
+                    const removedRoomType = event.target.parentNode.querySelector('.roomTypeSelect').value;
+                    const selects = document.querySelectorAll('.roomTypeSelect');
+                    selects.forEach(select => {
+                        Array.from(select.options).forEach(option => {
+                            if (option.value === removedRoomType) {
+                                option.disabled = false;
+                            }
+                        });
+                    });
+                }
+            });
+
+            // Event listener for room type change to set default values
+            roomsContainer.addEventListener('change', function (event) {
+                if (event.target.classList.contains('roomTypeSelect')) {
+                    const roomType = event.target.value;
+                    const roomIndex = event.target.id.replace('roomType', '');
+                    const defaultValues = setDefaultValues(roomType);
+                    document.getElementById(`roomPrice${roomIndex}`).value = defaultValues.price;
+                    document.getElementById(`roomCapacity${roomIndex}`).value = defaultValues.roomCapacity;
+                    document.getElementById(`totalRooms${roomIndex}`).value = defaultValues.totalRooms;
+                    document.getElementById(`roomsAvailable${roomIndex}`).value = defaultValues.roomsAvailable;
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>

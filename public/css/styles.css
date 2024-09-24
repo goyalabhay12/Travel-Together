@@ -1,0 +1,205 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+/* Reset default margin and padding */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: #ffffff;
+	font-family: "Poppins", sans-serif;
+}
+
+/* Body styles */
+body {
+	font-family: "Poppins", sans-serif;
+    background-color: rgb(104, 164, 255);
+}
+
+a:visited,
+a:active {
+	color: #ffffff;
+}
+
+.container {
+	height: 100vh;
+	background-size: cover;
+	background-position: top;
+	background-repeat: no-repeat;
+	display:flex;
+	flex-direction: column;
+}
+
+#home-container {
+    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/default/bg3.jpg);
+    animation: zoomOut 5s ease-out forwards; /* Adjust duration as needed */
+}
+
+@keyframes zoomOut {
+    0% {
+        background-size: 100% 100%;
+    }
+    100% {
+        background-size: 120% 120%; 
+    }
+}
+
+/* home */
+#home {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+    margin-top: 7%;
+}
+
+@keyframes moveText {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+#home h1{
+    line-height: 1;
+    font-size: 75px;
+    padding-bottom: 0%;
+    margin-bottom: 0%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: moveText 2s ease-in-out forwards;
+}
+
+.contact-left h1{
+    font-size: 75px;
+    padding-bottom: 0%;
+    margin-bottom: 0%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#home p {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3));
+    font-size: 25px;
+    padding-top: 0%;
+    margin-top: 0%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	font-family: "Montserrat", sans-serif;
+    animation: moveText 2s ease-in-out forwards;
+}
+
+.travel {
+	color: #2567ff !important;
+    margin: 0;
+}
+
+
+.search {
+    height: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    animation: moveText 2s ease-in-out forwards;
+}
+
+.search-panel {
+    display: flex;
+    justify-content: center;
+	background-color: rgb(78, 100, 238);
+	width: auto;
+	height: auto;
+	border-radius: 30px;
+	padding: 20px;
+}
+
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.form-group {
+    margin: 10px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.search-panel input {
+    padding: 10px 20px ;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    width: 200px;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #013a68;
+    color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 200px;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: rgb(0, 187, 255);
+}
+
+/* contact-us */
+
+.contact-us {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	background-color: #007bff;
+	padding: 5%
+}
+
+.contact-left {
+	flex: 1;
+    text-align: left;
+	margin-left: 5%;
+	margin-right: 8%;
+	width: max-content;
+}
+
+.contact-right {
+	display: flex;
+    text-align: right;
+    margin-right: 10%;
+    width: 20%;
+}
+
+.contact-left h1{
+    font-size: 50px;
+    padding-bottom: 0%;
+    margin-bottom: 0%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.contact-right button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.contact-right button:hover {
+    background-color: #0056b3;
+}

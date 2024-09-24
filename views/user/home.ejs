@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Expires" content="0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="icon" type="image/x-icon" href="/images/default/favicon.png">
+</head>
+
+<body>
+    <div id="home-container" class="container">
+        <!-- Header -->
+        <%- include('../partials/header') %>
+
+            <!-- Home Content -->
+            <div id="home">
+                <h1>WELCOME TO, <br> <span class="travel">TRAVEL TOGETHER</span>!</h1>
+                <p>"Dive into the world of Unforgettable Adventures"</p>
+            </div>
+
+            <!-- Search Panel
+            <div class="search">
+                <div class="search-panel">
+                    <form action="/search" method="GET" class="search-form">
+                        <div class="form-group">
+                            <label for="destination">Destination*</label>
+                            <input type="text" id="destination" name="destination" placeholder="Enter Destination"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="people">No. of People*</label>
+                            <input type="number" id="people" name="people" placeholder="Enter No. of People" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkin">Check-in Date*</label>
+                            <input type="date" id="checkin" name="checkin" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout">Checkout Date*</label>
+                            <input type="date" id="checkout" name="checkout" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Inquiry</button>
+                        </div>
+                    </form>
+                </div>
+            </div> -->
+    </div>
+
+    <!-- popular-package -->
+    <div class="popular-package">
+        <!-- Content for popular packages -->
+    </div>
+
+    <!-- contact us -->
+    <div class="contact-us">
+        <div class="contact-left">
+            <h2>CALL TO ACTION</h2>
+            <h1>READY FOR UNFORGETTABLE TRAVEL. REMEMBER US!</h1>
+            <p>For any inquiries or assistance, feel free to reach out to us. Our team is here to help you make your
+                travel dreams a reality.</p>
+        </div>
+        <div class="contact-right">
+            <button onclick="redirectToContact()">Contact Us</button>
+        </div>
+    </div>
+
+
+    <!-- footer -->
+    <%- include('../partials/footer') %>
+
+        <!-- script -->
+        <script src="/js/userScript.js"></script>
+        <script src="/js/headerScript.js"></script>
+        <script>
+            function redirectToContact() {
+                window.location.href = "/contactUs";
+            }
+        </script>
+        
+</body>
+
+</html>
